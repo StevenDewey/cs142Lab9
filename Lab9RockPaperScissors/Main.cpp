@@ -25,9 +25,119 @@ void check_cin(int& userInput)
         userInput = 0;
     }
 }
+int findPlayer(vector<Player*>& allPlayers, string newName){
+	if (allPlayers.size() == 0)
+		{
+			return -1;
+		}
+	for (int i = 0; i < allPlayers.size(); i++)
+	{
+		if (newName == allPlayers[i]->getName())
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+void showPlayers(vector<Player*> players){
+	for (int i = 0; i < players.size(); i++)
+		{
+			cout << players[i]->toString() << endl;
+		}
+		if (players.size() == 0)
+		{
+			cout << "\nNo Players Are Currently in the System. Try Selecting Option 2 From the Menu to Add More Players." << endl;
+		}
+}
+void addPlayer(vector<Player*>& allPlayers){
+	string newName;
+		cout << "\nNew Player Name: " << endl;
+		cin.sync();
+		getline(cin, newName);
+		if (findPlayer(allPlayers, newName) >=0)
+		{
+			cout << "\nError, Player Named " << newName << " is Already in System. Please Try Again." << endl;
+		}
+		else
+		{
+			allPlayers.push_back(new Player(newName));
+			cout << "\nPlayer Named " << newName << " Has Been Added to System." << endl;
+		}
+}
+void addPlayerToLineUp(vector<Player*>& allPlayers, vector<Player*>& playersWaiting){
+	string playerName;
+		cout << "Player Name: " << endl;
+		cin.sync();
+		getline(cin, playerName);
+		int index = findPlayer(allPlayers, playerName);
+		if (index >=0)
+		{
+			playersWaiting.push_back(allPlayers[index]);
+			cout << "\nPlayer Named " << playerName << " Has Been Added to the Line-Up." << endl;
+		}
+		else
+		{
+			cout << "\nError, Player Named " << playerName << " is Not in System. Please Try Again." << endl;
+		}
+}
+void fight(vector<Player*>& playersWaiting) {
+	if (playersWaiting.size() == 0)
+	{
+		cout << "\nError, No Players are Waiting to Play. A Minimum of 2 Players in the Line-up is Required to Play. Try Selecting Menu Option #3 to Add Players to the Line-up." << endl;
+	}
+	else if (playersWaiting.size() == 1)
+	{
+		cout << "\nError, Only 1 Player is Waiting to Play. A Minimum of 2 Players in the Line-up is Required to Play. Try Selecting Menu Option #3 to Add Players to the Line-up." << endl;
+	}
+	else if (playersWaiting[0] == playersWaiting[1])
+	{
+		cout << "\nThe Player Named " << playersWaiting[0]->getName() << " Was Lined-up to Play Themself, The Result was a Draw." << endl;
+		playersWaiting[0]->setDraws(1);
+		for (int i = playersWaiting.size() -3; i >= 0 ; i--)
+		{
+			playersWaiting[i] = playersWaiting[i+2];
+		}
+		playersWaiting.pop_back();
+		playersWaiting.pop_back();
+	}
+	else
+	{
+		cout << "\n" << "Fight Initiated Between " << playersWaiting[0]->getName() << " and " << playersWaiting[1]->getName() << "!" << endl;
+		string player1 = playersWaiting[0]->getRPSThrow();
+		cout << "\n" << playersWaiting[0]->getName() << " Throws " << player1 << "!" << endl;
+		string player2 = playersWaiting[1]->getRPSThrow();
+		cout << playersWaiting[1]->getName() << " Throws " << player2 << "!" << endl;
+		if ( (player1 == "Rock" && player2 == "Scissors") || (player1 == "Scissors" && player2 == "Paper") || (player1 == "Paper" && player2 == "Rock") )
+		{
+			playersWaiting[0]->setWins(1);
+			playersWaiting[1]->setLosses(1);
+			cout << "\n" << playersWaiting[0]->getName() << " is the Winner!" << endl;
+		}
+		else if ( (player2 == "Rock" && player1 == "Scissors") || (player2 == "Scissors" && player1 == "Paper") || (player2 == "Paper" && player1 == "Rock") )
+		{
+			playersWaiting[1]->setWins(1);
+			playersWaiting[0]->setLosses(1);
+			cout << "\n" << playersWaiting[1]->getName() << " is the Winner!" << endl;
+		}
+		else if (player1 == player2)
+		{
+			playersWaiting[0]->setDraws(1);
+			playersWaiting[1]->setDraws(1);
+			cout << "\nIt was a Draw!" << endl;
+		}
+		for (int i = playersWaiting.size() -3; i >= 0 ; i--)
+		{
+			playersWaiting[i] = playersWaiting[i+2];
+		}
+		playersWaiting.pop_back();
+		playersWaiting.pop_back();
+	}
+}
 
 int main()
 {
+	srand ( (unsigned int)time(0) ); 
 	vector<Player*> allPlayers;
 	vector<Player*> playersWaiting;
 	bool keepLooping = true;
@@ -44,30 +154,30 @@ int main()
 		cout << "6 - Quit Program " << endl;
 		cin >> userInput;
 		check_cin(userInput);
-		//if user inputs a 1 then display all the inventory with a for loop
+		//if user inputs a 1 then display all the players with a for loop
 		if (userInput == 1)
 		{
-			
+			showPlayers(allPlayers);
 		}
-		//if the user inputs 2 then simply display the current balance 
+		//if the user inputs 2 then add a new player 
 		else if (userInput== 2)
 		{
-			
+			addPlayer(allPlayers);
 		}
-		//if use inputs three then allow user to buy a car if the car is not already in the inventory and if buying the car will not make the balance less than 0
+		//This will prompt the user for a name.  You must verify that this Player is pointed to in the vector that points to all players.  If so, you will add a * (pointer) to the same Player in the vector of players waiting to compete.
 		else if (userInput== 3)
 		{
-			
+			addPlayerToLineUp(allPlayers, playersWaiting);
 		}
-		//function to sell a the car the user inputs to sell if the car they input is in the system. 
+		//This will show all of the players waiting to compete.
 		else if (userInput== 4)
 		{
-			
+			showPlayers(playersWaiting);
 		}
-		//function to pain the car if the car the user inputs is in the system 
+		//This will take the first two players pointed to in the vector of players waiting to compete (the two that have been waiting the longest) and will have them compete. 
 		else if (userInput== 5)
 		{
-			
+			fight(playersWaiting);
 		}
 		//exit the program
 		else if (userInput== 6)

@@ -9,9 +9,9 @@ class Player
 {
 	private:
 		string name;
-		int numberOfWins;
-		int numberOfLosses;
-		int numberOfDraws;
+		double numberOfWins;
+		double numberOfLosses;
+		double numberOfDraws;
 
 	public:
 		//---------------------------------------------------------------------------------------
@@ -35,6 +35,43 @@ class Player
 		 *		The name of the car
 		 */
 		string getRPSThrow();
+		//---------------------------------------------------------------------------------------
+		/* 
+		 * getName
+		 * 
+		 * Returns the Randomize the selection of choosing rock, paper or scissors, and return the chosen "throw.".
+		 * 
+		 * Return:
+		 *		The name of the car
+		 */
+		string getName();
+		/* 
+		 * setWins
+		 * 
+		 * Sets the number of wins after a battle has taken place.
+		 * 
+		 * Return:
+		 *		nothing, its void.
+		 */
+		void Player::setWins(double win);
+		/* 
+		 * setLosses
+		 * 
+		 * Sets the number of losses after a battle has taken place.
+		 * 
+		 * Return:
+		 *		nothing, its void.
+		 */
+		void Player::setLosses(double loss);
+		/* 
+		 * setDraws
+		 * 
+		 * Sets the number of draws after a battle has taken place.
+		 * 
+		 * Return:
+		 *		nothing, its void.
+		 */
+		void Player::setDraws(double draw);
 		/* 
 		 * getWinRecord
 		 * 
