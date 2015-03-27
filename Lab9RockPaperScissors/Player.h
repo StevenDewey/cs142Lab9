@@ -1,4 +1,4 @@
-//WARNING: It is expressly forbidden to modify any part of this document, including its name
+//Author: Steven Dewey
 #pragma once
 #include <iostream>
 #include <string>
@@ -9,68 +9,46 @@ class Player
 {
 	private:
 		string name;
-		string color;
-		double price;
+		int numberOfWins;
+		int numberOfLosses;
+		int numberOfDraws;
 
 	public:
 		//---------------------------------------------------------------------------------------
 		/* 
 		 * Constructor/Destructor
 		 * 
-		 * Handles creation and deletion of Car objects.
+		 * Handles creation and deletion of Player objects.
 		 * 
 		 * Parameter: name_in
-		 *		The name of a new car
-		 * Parameter: color_in
-		 *		The color of a new car
-		 * Parameter: price_in
-		 *		The price of a new car
+		 *		The name of a new player
 		 */
-		Car(string name_in, string color_in, double price_in);
-		virtual ~Car();
+		Player(string name_in);
+		virtual ~Player();
 		//---------------------------------------------------------------------------------------
 		/* 
 		 * getName
 		 * 
-		 * Returns the name of the car.
+		 * Returns the Randomize the selection of choosing rock, paper or scissors, and return the chosen "throw.".
 		 * 
 		 * Return:
 		 *		The name of the car
 		 */
-		string getName();
+		string getRPSThrow();
 		/* 
-		 * getColor
+		 * getWinRecord
 		 * 
-		 * Returns the color of the car.
+		 * Returns the number of wins divided by all matches in which the player has participated.
 		 * 
 		 * Return:
-		 *		The color of the car
+		 *		string
 		 */
-		string getColor();
-		/* 
-		 * getPrice
-		 * 
-		 * Returns the price of the car.
-		 * 
-		 * Return:
-		 *		The price of the car
-		 */
-		double getPrice();
-		//---------------------------------------------------------------------------------------
-		/* 
-		 * paint
-		 * 
-		 * Paints the car a new color and increases the price by $1,000.
-		 * 
-		 * Parameter: new_color
-		 *		The color of paint to be used on the car
-		 */
-		void paint(string new_color);
+		double getWinRecord();
 		//---------------------------------------------------------------------------------------
 		/* 
 		 * toString
 		 * 
-		 * Returns a single string containing useful information about the car.
+		 * This function returns a string that has all of the information about the player (including his/her win record).
 		 * 
 		 * Return:
 		 *		A data string about this car
