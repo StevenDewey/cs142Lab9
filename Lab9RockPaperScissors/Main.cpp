@@ -106,8 +106,8 @@ void fight(vector<Player*>& playersWaiting) {
 	{
 		cout << "\nThe Player Named " << playersWaiting[0]->getName() << " Was Lined-up to Play Themself, The Result was a Draw." << endl;
 		playersWaiting[0]->setDraws(1);
-		playersWaiting.erase.begin();
-		playersWaiting.erase.begin();
+		playersWaiting.erase(playersWaiting.begin());
+		playersWaiting.erase(playersWaiting.begin());
 	}
 	else
 	{
@@ -136,8 +136,8 @@ void fight(vector<Player*>& playersWaiting) {
 			cout << "\nIt was a Draw!" << endl;
 		}
 		//remove the players that just played. 
-		playersWaiting.erase.begin();
-		playersWaiting.erase.begin();
+		playersWaiting.erase(playersWaiting.begin());
+		playersWaiting.erase(playersWaiting.begin());
 	}
 }
 //start main function
