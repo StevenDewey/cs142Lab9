@@ -1,4 +1,6 @@
 //Author: Steven Dewey
+//Description: Declaring the Player class and all variables and functions that make up the class.
+
 #pragma once
 #include <iostream>
 #include <string>
@@ -29,20 +31,20 @@ class Player
 		/* 
 		 * getName
 		 * 
-		 * Returns the Randomize the selection of choosing rock, paper or scissors, and return the chosen "throw.".
+		 * Returns the Randomize the selection of choosing rock, paper or scissors, and return the chosen "throw."
 		 * 
 		 * Return:
-		 *		The name of the car
+		 *		The name of the throw
 		 */
 		string getRPSThrow();
 		//---------------------------------------------------------------------------------------
 		/* 
 		 * getName
 		 * 
-		 * Returns the Randomize the selection of choosing rock, paper or scissors, and return the chosen "throw.".
+		 * Returns the name of the Player.
 		 * 
 		 * Return:
-		 *		The name of the car
+		 *		The name of the Player
 		 */
 		string getName();
 		/* 
@@ -78,7 +80,7 @@ class Player
 		 * Returns the number of wins divided by all matches in which the player has participated.
 		 * 
 		 * Return:
-		 *		string
+		 *		double
 		 */
 		double getWinRecord();
 		//---------------------------------------------------------------------------------------
@@ -88,7 +90,7 @@ class Player
 		 * This function returns a string that has all of the information about the player (including his/her win record).
 		 * 
 		 * Return:
-		 *		A data string about this car
+		 *		A data string about this player
 		 */
 		string toString();
 		//---------------------------------------------------------------------------------------
