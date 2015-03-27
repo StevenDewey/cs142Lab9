@@ -1,5 +1,9 @@
-//WARNING: It is expressly forbidden to modify any part of this document, including its name
+//Author: Steven Dewey
+// Description: .cpp file to describe the variables and functions associated with the Player class
+
 #include "Player.h"
+#include <iomanip>
+
 using namespace std;
 
 //---------------------------------------------------------------------------------------
@@ -66,7 +70,7 @@ string Player::toString()
 	ss << "Number of Wins: " << numberOfWins << endl;
 	ss << "Number of Losses: " << numberOfLosses << endl;
 	ss << "Number of Draws: " << numberOfDraws << endl;
-	ss << "Winning Record: " << getWinRecord() << "%" << endl;
+	ss << "Winning Record: " << fixed << setprecision(2) << getWinRecord() << "%" << endl;
 	return ss.str();
 }
 //---------------------------------------------------------------------------------------

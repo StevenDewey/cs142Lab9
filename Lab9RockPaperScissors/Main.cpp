@@ -1,8 +1,8 @@
 //Author: Steven Dewey 
-//Description: This application manages the inventory of a car lot, this is done by using a car class to manage all the differnt cars in the system 
-//test case #1: I enter 2 and all the current inventory is displayed and I am routed back to the main screen
-//test case #2: I enter 5 and am prompted to enter the name of a car to paint, if the car is in the system then I choose what color and then that color is updated, and the price goes up by 1000
-//test case #3 I enter 7 and I am prompted for the name of the file I want to save and then the current inventory is saved to the file. 
+//Description: This application simulates playing rock, paper, scissors in a really fun way. 
+//test case #1: I enter 2 and enter in a new player, I enter 2 again and enter the same name and am told the player already exists. 
+//test case #2: I enter 2 and enter in a new player, I enter 1 and the name of that person is displayed along with all zero's because the player has not played in any games yet. 
+//test case #3: I enter 2 and enter a new player, I do it again so I now have 2 players, I enter both players into the line up by pressing 3 and entering the players names, I then enter 5 and the players battle, each player is randomely assigned either rock paper or scissors and a winner is determined or a draw is declared. 
 
 #include <iostream>
 #include <string>
@@ -25,6 +25,7 @@ void check_cin(int& userInput)
         userInput = 0;
     }
 }
+//fuction to find a player. 
 int findPlayer(vector<Player*>& allPlayers, string newName){
 	if (allPlayers.size() == 0)
 		{
@@ -39,17 +40,26 @@ int findPlayer(vector<Player*>& allPlayers, string newName){
 	}
 	return -1;
 }
-
-void showPlayers(vector<Player*> players){
+//function to show players, with a bool to check on if the function is called as part of case 1 or 4. 
+void showPlayers(vector<Player*> players, bool lineUp){
 	for (int i = 0; i < players.size(); i++)
 		{
 			cout << players[i]->toString() << endl;
 		}
 		if (players.size() == 0)
 		{
-			cout << "\nNo Players Are Currently in the System. Try Selecting Option 2 From the Menu to Add More Players." << endl;
+			if (lineUp)
+			{
+				cout << "\nNo Players Are Currently in the Line-up. Try Selecting Option 3 From the Menu to Add More Players to the Line-up" << endl;
+			}
+			else
+			{
+				cout << "\nNo Players Are Currently in the System. Try Selecting Option 2 From the Menu to Add More Players." << endl;
+			}
+			
 		}
 }
+//function to add a new player. 
 void addPlayer(vector<Player*>& allPlayers){
 	string newName;
 		cout << "\nNew Player Name: " << endl;
@@ -65,6 +75,7 @@ void addPlayer(vector<Player*>& allPlayers){
 			cout << "\nPlayer Named " << newName << " Has Been Added to System." << endl;
 		}
 }
+//function to add a player from the all player vector to the line-up vector.
 void addPlayerToLineUp(vector<Player*>& allPlayers, vector<Player*>& playersWaiting){
 	string playerName;
 		cout << "Player Name: " << endl;
@@ -81,6 +92,7 @@ void addPlayerToLineUp(vector<Player*>& allPlayers, vector<Player*>& playersWait
 			cout << "\nError, Player Named " << playerName << " is Not in System. Please Try Again." << endl;
 		}
 }
+//function to fight with the two players in the front of the line-up vector, removing the two players at the front each time. 
 void fight(vector<Player*>& playersWaiting) {
 	if (playersWaiting.size() == 0)
 	{
@@ -103,6 +115,7 @@ void fight(vector<Player*>& playersWaiting) {
 	}
 	else
 	{
+		//play rock paper scissors!!
 		cout << "\n" << "Fight Initiated Between " << playersWaiting[0]->getName() << " and " << playersWaiting[1]->getName() << "!" << endl;
 		string player1 = playersWaiting[0]->getRPSThrow();
 		cout << "\n" << playersWaiting[0]->getName() << " Throws " << player1 << "!" << endl;
@@ -126,6 +139,7 @@ void fight(vector<Player*>& playersWaiting) {
 			playersWaiting[1]->setDraws(1);
 			cout << "\nIt was a Draw!" << endl;
 		}
+		//remove the players that just played. 
 		for (int i = playersWaiting.size() -3; i >= 0 ; i--)
 		{
 			playersWaiting[i] = playersWaiting[i+2];
@@ -134,9 +148,10 @@ void fight(vector<Player*>& playersWaiting) {
 		playersWaiting.pop_back();
 	}
 }
-
+//start main function
 int main()
 {
+	//declare variables necessary for this scope.
 	srand ( (unsigned int)time(0) ); 
 	vector<Player*> allPlayers;
 	vector<Player*> playersWaiting;
@@ -157,7 +172,7 @@ int main()
 		//if user inputs a 1 then display all the players with a for loop
 		if (userInput == 1)
 		{
-			showPlayers(allPlayers);
+			showPlayers(allPlayers, false);
 		}
 		//if the user inputs 2 then add a new player 
 		else if (userInput== 2)
@@ -172,7 +187,7 @@ int main()
 		//This will show all of the players waiting to compete.
 		else if (userInput== 4)
 		{
-			showPlayers(playersWaiting);
+			showPlayers(playersWaiting, true);
 		}
 		//This will take the first two players pointed to in the vector of players waiting to compete (the two that have been waiting the longest) and will have them compete. 
 		else if (userInput== 5)
