@@ -81,6 +81,59 @@ void addPlayerToLineUp(vector<Player*>& allPlayers, vector<Player*>& playersWait
 			cout << "\nError, Player Named " << playerName << " is Not in System. Please Try Again." << endl;
 		}
 }
+void fight(vector<Player*>& playersWaiting) {
+	if (playersWaiting.size() == 0)
+	{
+		cout << "\nError, No Players are Waiting to Play. A Minimum of 2 Players in the Line-up is Required to Play. Try Selecting Menu Option #3 to Add Players to the Line-up." << endl;
+	}
+	else if (playersWaiting.size() == 1)
+	{
+		cout << "\nError, Only 1 Player is Waiting to Play. A Minimum of 2 Players in the Line-up is Required to Play. Try Selecting Menu Option #3 to Add Players to the Line-up." << endl;
+	}
+	else if (playersWaiting[0] == playersWaiting[1])
+	{
+		cout << "\nThe Player Named " << playersWaiting[0]->getName() << " Was Lined-up to Play Themself, The Result was a Draw." << endl;
+		playersWaiting[0]->setDraws(1);
+		for (int i = playersWaiting.size() -3; i >= 0 ; i--)
+		{
+			playersWaiting[i] = playersWaiting[i+2];
+		}
+		playersWaiting.pop_back();
+		playersWaiting.pop_back();
+	}
+	else
+	{
+		cout << "\n" << "Fight Initiated Between " << playersWaiting[0]->getName() << " and " << playersWaiting[1]->getName() << "!" << endl;
+		string player1 = playersWaiting[0]->getRPSThrow();
+		cout << "\n" << playersWaiting[0]->getName() << " Throws " << player1 << "!" << endl;
+		string player2 = playersWaiting[1]->getRPSThrow();
+		cout << playersWaiting[1]->getName() << " Throws " << player2 << "!" << endl;
+		if ( (player1 == "Rock" && player2 == "Scissors") || (player1 == "Scissors" && player2 == "Paper") || (player1 == "Paper" && player2 == "Rock") )
+		{
+			playersWaiting[0]->setWins(1);
+			playersWaiting[1]->setLosses(1);
+			cout << "\n" << playersWaiting[0]->getName() << " is the Winner!" << endl;
+		}
+		else if ( (player2 == "Rock" && player1 == "Scissors") || (player2 == "Scissors" && player1 == "Paper") || (player2 == "Paper" && player1 == "Rock") )
+		{
+			playersWaiting[1]->setWins(1);
+			playersWaiting[0]->setLosses(1);
+			cout << "\n" << playersWaiting[1]->getName() << " is the Winner!" << endl;
+		}
+		else if (player1 == player2)
+		{
+			playersWaiting[0]->setDraws(1);
+			playersWaiting[1]->setDraws(1);
+			cout << "\nIt was a Draw!" << endl;
+		}
+		for (int i = playersWaiting.size() -3; i >= 0 ; i--)
+		{
+			playersWaiting[i] = playersWaiting[i+2];
+		}
+		playersWaiting.pop_back();
+		playersWaiting.pop_back();
+	}
+}
 
 int main()
 {
@@ -124,34 +177,7 @@ int main()
 		//This will take the first two players pointed to in the vector of players waiting to compete (the two that have been waiting the longest) and will have them compete. 
 		else if (userInput== 5)
 		{
-			if (playersWaiting.size() == 0)
-			{
-				cout << "\nError, No Players are Waiting to Play. A Minimum of 2 Players in the Line-up is Required to Play. Try Selecting Menu Option #3 to Add Players to the Line-up." << endl;
-			}
-			else if (playersWaiting.size() == 1)
-			{
-				cout << "\nError, Only 1 Player is Waiting to Play. A Minimum of 2 Players in the Line-up is Required to Play. Try Selecting Menu Option #3 to Add Players to the Line-up." << endl;
-			}
-			else
-			{
-				string player1 = playersWaiting[0]->getRPSThrow();
-				string player2 = playersWaiting[1]->getRPSThrow();
-				if ( (player1 == "Rock" && player2 == "Scissors") || (player1 == "Scissors" && player2 == "Paper") || (player1 == "Paper" && player2 == "Rock") )
-				{
-					playersWaiting[0]->setWins(1);
-					playersWaiting[1]->setLosses(1);
-				}
-				else if ( (player2 == "Rock" && player1 == "Scissors") || (player2 == "Scissors" && player1 == "Paper") || (player2 == "Paper" && player1 == "Rock") )
-				{
-					playersWaiting[1]->setWins(1);
-					playersWaiting[0]->setLosses(1);
-				}
-				else if (player1 == player2)
-				{
-					playersWaiting[0]->setDraws(1);
-					playersWaiting[1]->setDraws(1);
-				}
-			}
+			fight(playersWaiting);
 		}
 		//exit the program
 		else if (userInput== 6)
