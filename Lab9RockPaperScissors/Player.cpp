@@ -6,8 +6,9 @@ using namespace std;
 Player::Player(string name_in)
 {
 	name = name_in;
-	//color = color_in;
-	//price = price_in;
+	numberOfWins = 0;
+	numberOfLosses = 0;
+	numberOfDraws = 0;
 }
 Player::~Player(){}
 //---------------------------------------------------------------------------------------
@@ -37,16 +38,23 @@ string Player::getName()
 double Player::getWinRecord()
 {
 	double record;
+	double totalGames = (numberOfWins + numberOfLosses + numberOfDraws);
+	if (totalGames == 0)
+	{
+		return 0;
+	}
+	record = numberOfWins / totalGames;
 	return record;
 }
 //---------------------------------------------------------------------------------------
 string Player::toString()
 {
 	stringstream ss;
-	ss << "Name: " << name << endl;
+	ss << "\nName: " << name << endl;
 	ss << "Number of Wins: " << numberOfWins << endl;
 	ss << "Number of Losses: " << numberOfLosses << endl;
 	ss << "Number of Draws: " << numberOfDraws << endl;
+	ss << "Winning Record: " << getWinRecord() << "%" << endl;
 	return ss.str();
 }
 //---------------------------------------------------------------------------------------

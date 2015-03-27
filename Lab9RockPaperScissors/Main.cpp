@@ -52,13 +52,17 @@ int main()
 			{
 				cout << allPlayers[i]->toString() << endl;
 			}
+			if (allPlayers.size() == 0)
+			{
+				cout << "\nNo Players Are Currently in the System. Try Selecting Option 2 From the Menu to Add More Players." << endl;
+			}
 		}
 		//if the user inputs 2 then add a new player 
 		else if (userInput== 2)
 		{
 			string newName;
-			bool inSystem;
-			cout << "New Player Name: " << endl;
+			bool inSystem = false;
+			cout << "\nNew Player Name: " << endl;
 			cin.sync();
 			getline(cin, newName);
 			for (int i = 0; i < allPlayers.size(); i++)
@@ -74,11 +78,12 @@ int main()
 			}
 			if (inSystem)
 			{
-				cout << "Error, Player is Already in System. Please Try Again." << endl;
+				cout << "\nError, Player Named " << newName << " is Already in System. Please Try Again." << endl;
 			}
 			else
 			{
 				allPlayers.push_back(new Player(newName));
+				cout << "\nPlayer Named " << newName << " Has Been Added to System." << endl;
 			}
 
 		}

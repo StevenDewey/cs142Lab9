@@ -9,9 +9,9 @@ class Player
 {
 	private:
 		string name;
-		int numberOfWins;
-		int numberOfLosses;
-		int numberOfDraws;
+		double numberOfWins;
+		double numberOfLosses;
+		double numberOfDraws;
 
 	public:
 		//---------------------------------------------------------------------------------------
