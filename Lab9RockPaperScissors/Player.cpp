@@ -3,39 +3,32 @@
 using namespace std;
 
 //---------------------------------------------------------------------------------------
-Car::Car(string name_in, string color_in, double price_in)
+Player::Player(string name_in)
 {
 	name = name_in;
-	color = color_in;
-	price = price_in;
+	//color = color_in;
+	//price = price_in;
 }
-Car::~Car(){}
+Player::~Player(){}
 //---------------------------------------------------------------------------------------
-string Car::getName()
+string Player::getRPSThrow()
 {
-	return name;
+	string theThrow;
+	return theThrow;
 }
-string Car::getColor()
+double Player::getWinRecord()
 {
-	return color;
-}
-double Car::getPrice()
-{
-	return price;
+	double record;
+	return record;
 }
 //---------------------------------------------------------------------------------------
-void Car::paint(string new_color)
-{
-	color = new_color;
-	price += 1000;
-}
-//---------------------------------------------------------------------------------------
-string Car::toString()
+string Player::toString()
 {
 	stringstream ss;
 	ss << "Name: " << name << endl;
-	ss << "Color: " << color << endl;
-	ss << "Price: $" << price << endl;
+	ss << "Number of Wins: " << numberOfWins << endl;
+	ss << "Number of Losses: " << numberOfLosses << endl;
+	ss << "Number of Draws: " << numberOfDraws << endl;
 	return ss.str();
 }
 //---------------------------------------------------------------------------------------
