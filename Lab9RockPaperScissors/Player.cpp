@@ -35,6 +35,18 @@ string Player::getName()
 {	
 	return name;
 }
+void Player::setWins(double win)
+{	
+	numberOfWins += win;
+}
+void Player::setLosses(double loss)
+{	
+	numberOfLosses += loss;
+}
+void Player::setDraws(double draw)
+{	
+	numberOfDraws += draw;
+}
 double Player::getWinRecord()
 {
 	double record;

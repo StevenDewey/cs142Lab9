@@ -116,15 +116,42 @@ int main()
 		{
 			addPlayerToLineUp(allPlayers, playersWaiting);
 		}
-		//function to sell a the car the user inputs to sell if the car they input is in the system. 
+		//This will show all of the players waiting to compete.
 		else if (userInput== 4)
 		{
 			showPlayers(playersWaiting);
 		}
-		//function to pain the car if the car the user inputs is in the system 
+		//This will take the first two players pointed to in the vector of players waiting to compete (the two that have been waiting the longest) and will have them compete. 
 		else if (userInput== 5)
 		{
-			
+			if (playersWaiting.size() == 0)
+			{
+				cout << "\nError, No Players are Waiting to Play. A Minimum of 2 Players in the Line-up is Required to Play. Try Selecting Menu Option #3 to Add Players to the Line-up." << endl;
+			}
+			else if (playersWaiting.size() == 1)
+			{
+				cout << "\nError, Only 1 Player is Waiting to Play. A Minimum of 2 Players in the Line-up is Required to Play. Try Selecting Menu Option #3 to Add Players to the Line-up." << endl;
+			}
+			else
+			{
+				string player1 = playersWaiting[0]->getRPSThrow();
+				string player2 = playersWaiting[1]->getRPSThrow();
+				if ( (player1 == "Rock" && player2 == "Scissors") || (player1 == "Scissors" && player2 == "Paper") || (player1 == "Paper" && player2 == "Rock") )
+				{
+					playersWaiting[0]->setWins(1);
+					playersWaiting[1]->setLosses(1);
+				}
+				else if ( (player2 == "Rock" && player1 == "Scissors") || (player2 == "Scissors" && player1 == "Paper") || (player2 == "Paper" && player1 == "Rock") )
+				{
+					playersWaiting[1]->setWins(1);
+					playersWaiting[0]->setLosses(1);
+				}
+				else if (player1 == player2)
+				{
+					playersWaiting[0]->setDraws(1);
+					playersWaiting[1]->setDraws(1);
+				}
+			}
 		}
 		//exit the program
 		else if (userInput== 6)

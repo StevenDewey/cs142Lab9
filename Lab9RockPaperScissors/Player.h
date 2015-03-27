@@ -46,6 +46,33 @@ class Player
 		 */
 		string getName();
 		/* 
+		 * setWins
+		 * 
+		 * Sets the number of wins after a battle has taken place.
+		 * 
+		 * Return:
+		 *		nothing, its void.
+		 */
+		void Player::setWins(double win);
+		/* 
+		 * setLosses
+		 * 
+		 * Sets the number of losses after a battle has taken place.
+		 * 
+		 * Return:
+		 *		nothing, its void.
+		 */
+		void Player::setLosses(double loss);
+		/* 
+		 * setDraws
+		 * 
+		 * Sets the number of draws after a battle has taken place.
+		 * 
+		 * Return:
+		 *		nothing, its void.
+		 */
+		void Player::setDraws(double draw);
+		/* 
 		 * getWinRecord
 		 * 
 		 * Returns the number of wins divided by all matches in which the player has participated.
