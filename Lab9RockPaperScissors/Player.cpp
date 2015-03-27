@@ -14,7 +14,25 @@ Player::~Player(){}
 string Player::getRPSThrow()
 {
 	string theThrow;
+	int randomnum = rand() %3 +1;
+	if (randomnum == 1)
+	{
+		theThrow = "Rock";
+	}
+	else if (randomnum == 2)
+	{
+		theThrow = "Paper";
+	}
+	else if (randomnum == 3)
+	{
+		theThrow = "Scissors";
+	}
+	
 	return theThrow;
+}
+string Player::getName()
+{	
+	return name;
 }
 double Player::getWinRecord()
 {

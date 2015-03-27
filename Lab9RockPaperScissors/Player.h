@@ -35,6 +35,16 @@ class Player
 		 *		The name of the car
 		 */
 		string getRPSThrow();
+		//---------------------------------------------------------------------------------------
+		/* 
+		 * getName
+		 * 
+		 * Returns the Randomize the selection of choosing rock, paper or scissors, and return the chosen "throw.".
+		 * 
+		 * Return:
+		 *		The name of the car
+		 */
+		string getName();
 		/* 
 		 * getWinRecord
 		 * 

@@ -28,6 +28,7 @@ void check_cin(int& userInput)
 
 int main()
 {
+	srand ( (unsigned int)time(0) ); 
 	vector<Player*> allPlayers;
 	vector<Player*> playersWaiting;
 	bool keepLooping = true;
@@ -44,15 +45,42 @@ int main()
 		cout << "6 - Quit Program " << endl;
 		cin >> userInput;
 		check_cin(userInput);
-		//if user inputs a 1 then display all the inventory with a for loop
+		//if user inputs a 1 then display all the players with a for loop
 		if (userInput == 1)
 		{
-			
+			for (int i = 0; i < allPlayers.size(); i++)
+			{
+				cout << allPlayers[i]->toString() << endl;
+			}
 		}
-		//if the user inputs 2 then simply display the current balance 
+		//if the user inputs 2 then add a new player 
 		else if (userInput== 2)
 		{
-			
+			string newName;
+			bool inSystem;
+			cout << "New Player Name: " << endl;
+			cin.sync();
+			getline(cin, newName);
+			for (int i = 0; i < allPlayers.size(); i++)
+			{
+				if (newName == allPlayers[i]->getName())
+				{
+					inSystem = true;
+				}
+				else
+				{
+					inSystem = false;
+				}
+			}
+			if (inSystem)
+			{
+				cout << "Error, Player is Already in System. Please Try Again." << endl;
+			}
+			else
+			{
+				allPlayers.push_back(new Player(newName));
+			}
+
 		}
 		//if use inputs three then allow user to buy a car if the car is not already in the inventory and if buying the car will not make the balance less than 0
 		else if (userInput== 3)
