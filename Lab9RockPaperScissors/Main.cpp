@@ -25,6 +25,62 @@ void check_cin(int& userInput)
         userInput = 0;
     }
 }
+int findPlayer(vector<Player*>& allPlayers, string newName){
+	if (allPlayers.size() == 0)
+		{
+			return -1;
+		}
+	for (int i = 0; i < allPlayers.size(); i++)
+	{
+		if (newName == allPlayers[i]->getName())
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+void showPlayers(vector<Player*> players){
+	for (int i = 0; i < players.size(); i++)
+		{
+			cout << players[i]->toString() << endl;
+		}
+		if (players.size() == 0)
+		{
+			cout << "\nNo Players Are Currently in the System. Try Selecting Option 2 From the Menu to Add More Players." << endl;
+		}
+}
+void addPlayer(vector<Player*>& allPlayers){
+	string newName;
+		cout << "\nNew Player Name: " << endl;
+		cin.sync();
+		getline(cin, newName);
+		if (findPlayer(allPlayers, newName) >=0)
+		{
+			cout << "\nError, Player Named " << newName << " is Already in System. Please Try Again." << endl;
+		}
+		else
+		{
+			allPlayers.push_back(new Player(newName));
+			cout << "\nPlayer Named " << newName << " Has Been Added to System." << endl;
+		}
+}
+void addPlayerToLineUp(vector<Player*>& allPlayers, vector<Player*>& playersWaiting){
+	string playerName;
+		cout << "Player Name: " << endl;
+		cin.sync();
+		getline(cin, playerName);
+		int index = findPlayer(allPlayers, playerName);
+		if (index >=0)
+		{
+			playersWaiting.push_back(allPlayers[index]);
+			cout << "\nPlayer Named " << playerName << " Has Been Added to the Line-Up." << endl;
+		}
+		else
+		{
+			cout << "\nError, Player Named " << playerName << " is Not in System. Please Try Again." << endl;
+		}
+}
 
 int main()
 {
@@ -48,54 +104,22 @@ int main()
 		//if user inputs a 1 then display all the players with a for loop
 		if (userInput == 1)
 		{
-			for (int i = 0; i < allPlayers.size(); i++)
-			{
-				cout << allPlayers[i]->toString() << endl;
-			}
-			if (allPlayers.size() == 0)
-			{
-				cout << "\nNo Players Are Currently in the System. Try Selecting Option 2 From the Menu to Add More Players." << endl;
-			}
+			showPlayers(allPlayers);
 		}
 		//if the user inputs 2 then add a new player 
 		else if (userInput== 2)
 		{
-			string newName;
-			bool inSystem = false;
-			cout << "\nNew Player Name: " << endl;
-			cin.sync();
-			getline(cin, newName);
-			for (int i = 0; i < allPlayers.size(); i++)
-			{
-				if (newName == allPlayers[i]->getName())
-				{
-					inSystem = true;
-				}
-				else
-				{
-					inSystem = false;
-				}
-			}
-			if (inSystem)
-			{
-				cout << "\nError, Player Named " << newName << " is Already in System. Please Try Again." << endl;
-			}
-			else
-			{
-				allPlayers.push_back(new Player(newName));
-				cout << "\nPlayer Named " << newName << " Has Been Added to System." << endl;
-			}
-
+			addPlayer(allPlayers);
 		}
-		//if use inputs three then allow user to buy a car if the car is not already in the inventory and if buying the car will not make the balance less than 0
+		//This will prompt the user for a name.  You must verify that this Player is pointed to in the vector that points to all players.  If so, you will add a * (pointer) to the same Player in the vector of players waiting to compete.
 		else if (userInput== 3)
 		{
-			
+			addPlayerToLineUp(allPlayers, playersWaiting);
 		}
 		//function to sell a the car the user inputs to sell if the car they input is in the system. 
 		else if (userInput== 4)
 		{
-			
+			showPlayers(playersWaiting);
 		}
 		//function to pain the car if the car the user inputs is in the system 
 		else if (userInput== 5)
