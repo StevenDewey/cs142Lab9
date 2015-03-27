@@ -12,13 +12,14 @@
 #include <vector>
 #include <math.h>
 #include <sstream>
-//#include "Car.h"
+#include "Player.h"
 
 using namespace std;
 
 int main()
 {
-
+	vector<Player*> allPlayers;
+	vector<Player*> playersWaiting;
 	
 	system("pause");
 	return 0;
