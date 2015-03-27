@@ -55,7 +55,7 @@ class Player
 		 * Return:
 		 *		nothing, its void.
 		 */
-		void Player::setWins(double win);
+		void setWins(double win);
 		/* 
 		 * setLosses
 		 * 
@@ -64,7 +64,7 @@ class Player
 		 * Return:
 		 *		nothing, its void.
 		 */
-		void Player::setLosses(double loss);
+		void setLosses(double loss);
 		/* 
 		 * setDraws
 		 * 
@@ -73,7 +73,7 @@ class Player
 		 * Return:
 		 *		nothing, its void.
 		 */
-		void Player::setDraws(double draw);
+		void setDraws(double draw);
 		/* 
 		 * getWinRecord
 		 * 
